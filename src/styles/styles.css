@@ -102,7 +102,7 @@
     --light-600: #E4F1FF;
     --light-700: #374151;
     --light-800: #1F2937;
-    
+
     --success-main: #45B369;
     --success-surface: #DAF0E1;
     --success-border: #B5E1C3;
@@ -152,6 +152,7 @@
     --yellow-light-white: rgba(255, 159, 41, 0.25);
     --purple-light-white: rgba(132, 90, 223, 0.25);
     --pink-light-white: rgba(250, 54, 230, 0.25);
+    
     --base: #fff;
     --brand: var(--primary-600);
     --button-secondary: var(--primary-50);
