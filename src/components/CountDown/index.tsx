@@ -4,6 +4,6 @@ import styles from './styles.module.css';
 export function CountDown() {
   
   return (
-    <div className={`${styles.number}`}>00:00</div>
+    <div className={`${styles.number} text-neutral`}>00:00</div>
   );
 }

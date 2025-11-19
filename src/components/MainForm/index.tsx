@@ -5,7 +5,7 @@ import { CycleRow } from '../CycleRow';
 
 export function MainForm() {
   return (
-    <Form className='mt-4'>
+    <Form className='mt-4 text-neutral'>
       <Form.Group className='d-flex flex-row align-items-center'>
         <Form.Label>Task</Form.Label>
         <Form.Control
