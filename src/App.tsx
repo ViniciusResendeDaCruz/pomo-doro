@@ -5,6 +5,7 @@ import { Logo } from './components/Logo';
 import { Menu } from './components/Menu';
 import { CountDown } from './components/CountDown';
 import { MainForm } from './components/MainForm';
+import { Footer } from './components/Footer';
  
 export function App() {
   console.log('MyApp');
@@ -16,6 +17,7 @@ export function App() {
         <Menu />
         <CountDown />
         <MainForm />
+        <Footer />
       </div>
     </>
   );
