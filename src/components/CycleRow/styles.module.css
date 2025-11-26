@@ -1,0 +1,11 @@
+.workTimeDot {
+    color: var(--warning-500);
+}
+
+.shortBreakTimeDot {
+    color: var(--success-500);
+}
+
+.longBreakTimeDot {
+    color: var(--info-500);
+}

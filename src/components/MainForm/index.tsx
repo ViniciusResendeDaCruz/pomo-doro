@@ -10,6 +10,7 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
+import { Icon } from '@iconify/react';
 
 export function MainForm() {
   const taskNameRef = useRef<HTMLInputElement>(null);
@@ -68,6 +69,24 @@ export function MainForm() {
     console.log(newTask);
   };
 
+  const handlePauseTask = () => {
+    setState(prevState => ({
+      ...prevState,
+      activeTask: null,
+      secondsRemaining: 0,
+      formattedSecondsRemaining: '00:00',
+      tasks: prevState.tasks.map(task => {
+        if(prevState.activeTask?.id === task.id){
+          return {
+            ...task,
+            interruptedAt: Date.now(),
+          };
+        }
+        return task;
+      }),
+    }));
+  };
+
   return (
     <Form className='mt-4 text-neutral' onSubmit={handleCreateNewTask}>
       <Form.Group className='d-flex flex-row align-items-center'>
@@ -77,16 +96,40 @@ export function MainForm() {
           placeholder='Insira a tarefa que irá ser feita'
           className='w-100'
           ref={taskNameRef}
+          disabled={!!state.activeTask}
         />
       </Form.Group>
 
       <span className='fs-6'>Lorem ipsum dolor sit amet.</span>
 
-      <CycleRow />
+      {state.currentCycle > 0 && <CycleRow />}
 
-      <Button variant='outline-primary' type='submit' className='w-100'>
-        Start
-      </Button>
+      {!state.activeTask ? (
+        <Button
+          variant='outline-primary'
+          type='submit'
+          className='w-100'
+          title='Iniciar a tarefa'
+          aria-label='Iniciar a tarefa'
+          aria-labelledby='Iniciar a tarefa'
+          key='start-task-button'
+        >
+          <Icon icon='solar:play-circle-bold-duotone' width={24} height={24} />
+        </Button>
+      ) : (
+        <Button
+          variant='outline-danger'
+          type='button'
+          className='w-100'
+          title='Pausar a tarefa'
+          aria-label='Pausar a tarefa'
+          aria-labelledby='Pausar a tarefa'
+          onClick={handlePauseTask}
+          key='pause-task-button'
+        >
+          <Icon icon='solar:pause-circle-bold-duotone' width={24} height={24} />
+        </Button>
+      )}
     </Form>
   );
 }
