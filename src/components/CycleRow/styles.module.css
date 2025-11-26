@@ -1,3 +1,8 @@
+.cycleDot {
+    font-size: 2.4rem;
+    margin: 0 0.25rem;
+}
+
 .workTimeDot {
     color: var(--warning-500);
 }

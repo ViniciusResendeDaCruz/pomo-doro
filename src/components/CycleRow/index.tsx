@@ -5,6 +5,7 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { Icon } from '@iconify/react';
 import styles from './styles.module.css';
 import { getNextCycleType } from '../../utils/getNextCycleType';
+import { Tooltip } from '../Tooltip';
 
 export function CycleRow() {
   const { state } = useTaskContext();
@@ -21,20 +22,18 @@ export function CycleRow() {
     type: getNextCycleType(index + 1),
   }));
   return (
-    <div className='d-flex flex-column align-items-center mt-4 text-neutral'>
-      <span className='fs-6 text-center'>Ciclos</span>
+    <div className='d-flex flex-column align-items-center mt-4 text-neutral '>
+      <span className='fs-4 text-center'>Ciclos</span>
       <div className='cycleDots'>
         {cycles.map(task => (
-          <span
-            key={task.id}
-            aria-label={`Ciclo ${task.id} - ${cycleTypeMap[task.type]}`}
-            title={`Ciclo ${task.id} - ${cycleTypeMap[task.type]}`}
-          >
-            <Icon
-              icon='solar:check-circle-bold-duotone'
-              className={styles[`${task.type}Dot`]}
-            />
-          </span>
+          <Tooltip key={task.id} title={`Ciclo ${task.id} - ${cycleTypeMap[task.type]}`}>
+            <span>
+              <Icon
+                icon='solar:check-circle-bold-duotone'
+                className={`${styles[`${task.type}Dot`]} ${styles.cycleDot}`}
+              />
+            </span>
+          </Tooltip>
         ))}
       </div>
     </div>

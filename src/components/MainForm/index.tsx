@@ -1,6 +1,6 @@
 // import styles from './styles.module.css';
 // import { Icon } from '@iconify/react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import { CycleRow } from '../CycleRow';
 import { useRef } from 'react';
 import Swal from 'sweetalert2';
@@ -12,6 +12,7 @@ import { getNextCycleType } from '../../utils/getNextCycleType';
 // import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 import { Icon } from '@iconify/react';
 import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
 
 export function MainForm() {
   const taskNameRef = useRef<HTMLInputElement>(null);
@@ -58,7 +59,7 @@ export function MainForm() {
 
     // const secondsRemaining = newTask.duration * 60;
 
-    dispatch({ 
+    dispatch({
       type: TaskActionsTypes.START_TASK,
       payload: newTask,
     });
@@ -67,14 +68,14 @@ export function MainForm() {
   };
 
   const handlePauseTask = () => {
-    dispatch({ 
+    dispatch({
       type: TaskActionsTypes.INTERRUPT_TASK,
     });
   };
 
   return (
     <Form className='mt-4 text-neutral' onSubmit={handleCreateNewTask}>
-      <Form.Group className='d-flex flex-row align-items-center'>
+      <Form.Group className='d-flex flex-column align-items-center'>
         <Form.Label>Task</Form.Label>
         <Form.Control
           type='text'
@@ -85,9 +86,11 @@ export function MainForm() {
         />
       </Form.Group>
 
-      <span className='fs-6'>Lorem ipsum dolor sit amet.</span>
+      <Container className='d-flex justify-content-center my-4'>
+        <Tips nextCycleType={nextCycleType} />
+      </Container>
 
-      {state.currentCycle > 0 && <CycleRow />}
+      <Container className='my-4'>{state.currentCycle > 0 && <CycleRow />}</Container>
 
       {!state.activeTask ? (
         <Button
