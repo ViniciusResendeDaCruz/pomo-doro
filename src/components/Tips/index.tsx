@@ -1,6 +1,6 @@
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import type { TaskModel } from '../../models/TaskModel';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 // import { Icon } from '@iconify/react';
 
 export function Tips({nextCycleType}:{nextCycleType: TaskModel['type']}) {
@@ -16,7 +16,7 @@ export function Tips({nextCycleType}:{nextCycleType: TaskModel['type']}) {
     shortBreakTime: <span>Próximo descanso é de <strong>{state.config.shortBreakTime}</strong> min.</span>,
     longBreakTime: <span>Próximo descanso é de <strong>{state.config.longBreakTime}</strong> min.</span>,
   }
-  console.log('state.activeTask', state.activeTask);
+  // console.log('state.activeTask', state.activeTask);
   return (
     <span className='fs-5'>{
       state.activeTask ? 

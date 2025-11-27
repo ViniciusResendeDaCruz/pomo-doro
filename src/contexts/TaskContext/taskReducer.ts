@@ -9,7 +9,7 @@ export function taskReducer(state: TaskStateModel, action: TaskActionModel) {
     case TaskActionsTypes.START_TASK: {
       const newTask = action.payload;
       const nextCycle = getNextCycle(state.currentCycle);
-    //   const nextCycleType = getNextCycleType(nextCycle);
+      //   const nextCycleType = getNextCycleType(nextCycle);
       const secondsRemaining = newTask.duration * 60;
 
       return {
@@ -21,19 +21,42 @@ export function taskReducer(state: TaskStateModel, action: TaskActionModel) {
         tasks: [...state.tasks, newTask],
       };
     }
-    case TaskActionsTypes.INTERRUPT_TASK:{
-        return {
-            ...state,
-            activeTask: null,
-            secondsRemaining: 0,
-            formattedSecondsRemaining: '00:00',
-            tasks: state.tasks.map(task => {
-                if(task.id === state.activeTask?.id){
-                    return { ...task, interruptedAt: Date.now() };
-                }
-                return task;
-            }),
-        }
+    case TaskActionsTypes.INTERRUPT_TASK: {
+      return {
+        ...state,
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: '00:00',
+        tasks: state.tasks.map(task => {
+          if (task.id === state.activeTask?.id) {
+            return { ...task, interruptedAt: Date.now() };
+          }
+          return task;
+        }),
+      };
+    }
+    case TaskActionsTypes.COUNT_DOWN: {
+      return {
+        ...state,
+        secondsRemaining: action.payload.secondsRemaining,
+        formattedSecondsRemaining: formatSecondsToMinutes(
+          action.payload.secondsRemaining,
+        ),
+      };
+    }
+    case TaskActionsTypes.COMPLETE_TASK: {
+      return {
+        ...state,
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: '00:00',
+        tasks: state.tasks.map(task => {
+          if (task.id === state.activeTask?.id) {
+            return { ...task, endsAt: Date.now() };
+          }
+          return task;
+        }),
+      };
     }
     default:
       return state;

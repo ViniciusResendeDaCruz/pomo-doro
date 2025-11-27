@@ -13,6 +13,7 @@ import { getNextCycleType } from '../../utils/getNextCycleType';
 import { Icon } from '@iconify/react';
 import { TaskActionsTypes } from '../../contexts/TaskContext/taskActions';
 import { Tips } from '../Tips';
+// import { TimerWorkerManager } from '../../workers/timerWorkerManager';
 
 export function MainForm() {
   const taskNameRef = useRef<HTMLInputElement>(null);
@@ -64,7 +65,8 @@ export function MainForm() {
       payload: newTask,
     });
 
-    console.log(newTask);
+    // const worker = TimerWorkerManager.getInstance(); 
+    
   };
 
   const handlePauseTask = () => {
