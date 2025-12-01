@@ -1,4 +1,5 @@
 import type { TaskModel } from '../../models/TaskModel';
+import type { TaskStateModel } from '../../models/TaskStateModel';
 // import type { TaskStateModel } from '../../models/TaskStateModel';
 
 export enum TaskActionsTypes {
@@ -8,6 +9,7 @@ export enum TaskActionsTypes {
   COUNT_DOWN = 'COUNT_DOWN',
   COMPLETE_TASK = 'COMPLETE_TASK',
   CLEAR_HISTORY = 'CLEAR_HISTORY',
+  SAVE_CONFIG = 'SAVE_CONFIG',
 }
 
 export type TaskActionModel =
@@ -31,4 +33,8 @@ export type TaskActionModel =
     }
   | {
       type: TaskActionsTypes.CLEAR_HISTORY;
+    }
+  | {
+      type: TaskActionsTypes.SAVE_CONFIG;
+      payload: TaskStateModel['config'];
     };

@@ -4,6 +4,7 @@ import { Info } from '../../pages/Info';
 import { Home } from '../../pages/Home';
 import { History } from '../../pages/History';
 import { useEffect } from 'react';
+import { Config } from '../../pages/Config';
 
 function ScroolToTop() {
   const { pathname } = useLocation();
@@ -21,6 +22,7 @@ export function MainRoutes() {
         <Route path='/' element={<Home />} />
         <Route path='/info' element={<Info />} />
         <Route path='/history' element={<History />} />
+        <Route path='/config' element={<Config />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>

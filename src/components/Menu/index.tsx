@@ -39,7 +39,7 @@ export function Menu() {
         </Button>
       </RouterLink>
 
-      <RouterLink href='/settings'>
+      <RouterLink href='/config'>
         <Button variant='outline-primary' className='mx-3 p-2'>
           <Icon icon='solar:settings-bold-duotone' width={32} height={32} />
         </Button>
