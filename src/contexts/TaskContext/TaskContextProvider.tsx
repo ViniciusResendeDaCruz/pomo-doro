@@ -11,7 +11,19 @@ export function TaskContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [state, dispatch] = useReducer(taskReducer, initialTaskState);
+  const [state, dispatch] = useReducer(taskReducer, initialTaskState, () => {
+    //lazy initialization - já inicializa o estado com o valor do localStorage
+    const savedState = localStorage.getItem('state');
+
+    const parsedState = savedState ? JSON.parse(savedState) : initialTaskState;
+
+    return {
+      ...parsedState,
+      activeTask: null,
+      secondsRemaining: 0,
+      formattedSecondsRemaining: '00:00',
+    };
+  });
 
   const playBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
 
@@ -46,10 +58,12 @@ export function TaskContextProvider({
   }, [worker, dispatch]);
 
   useEffect(() => {
-    // console.log('state', state);
+    localStorage.setItem('state', JSON.stringify(state));
+
     if (!state.activeTask) {
       worker.terminate();
-    }
+      document.title = 'Pomo-Doro';
+    } else document.title = `${state.formattedSecondsRemaining} - Pomo-Doro`;
     worker.postMessage(state);
   }, [worker, state]);
 

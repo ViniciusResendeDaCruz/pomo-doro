@@ -65,8 +65,7 @@ export function MainForm() {
       payload: newTask,
     });
 
-    // const worker = TimerWorkerManager.getInstance(); 
-    
+    // const worker = TimerWorkerManager.getInstance();
   };
 
   const handlePauseTask = () => {
@@ -74,6 +73,8 @@ export function MainForm() {
       type: TaskActionsTypes.INTERRUPT_TASK,
     });
   };
+
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name || '';
 
   return (
     <Form className='mt-4 text-neutral' onSubmit={handleCreateNewTask}>
@@ -85,6 +86,7 @@ export function MainForm() {
           className='w-100'
           ref={taskNameRef}
           disabled={!!state.activeTask}
+          defaultValue={lastTaskName}
         />
       </Form.Group>
 
@@ -92,7 +94,9 @@ export function MainForm() {
         <Tips nextCycleType={nextCycleType} />
       </Container>
 
-      <Container className='my-4'>{state.currentCycle > 0 && <CycleRow />}</Container>
+      <Container className='my-4'>
+        {state.currentCycle > 0 && <CycleRow />}
+      </Container>
 
       {!state.activeTask ? (
         <Button
